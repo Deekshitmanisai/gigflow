@@ -1,3 +1,5 @@
+
+console.log("🔥 APP.JS WITH BIDS IS RUNNING 🔥");
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -5,6 +7,8 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./modules/auth/auth.routes.js";
 import gigRoutes from "./modules/gigs/gig.routes.js";
 import { protect } from "./middlewares/auth.middleware.js";
+import bidRoutes from "./modules/bids/bid.routes.js";
+
 
 const app = express();
 
@@ -25,6 +29,8 @@ app.use(
  */
 app.use("/auth", authRoutes);
 app.use("/gigs", gigRoutes);
+app.use("/bids", bidRoutes);
+
 
 /**
  * Health check

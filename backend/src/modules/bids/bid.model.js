@@ -1,0 +1,28 @@
+import mongoose from "mongoose";
+
+const bidSchema = new mongoose.Schema(
+  {
+    gig: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Gig",
+      required: true,
+    },
+    bidder: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    message: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+export const Bid = mongoose.model("Bid", bidSchema);
