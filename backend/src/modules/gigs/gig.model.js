@@ -20,6 +20,13 @@ const gigSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["open", "assigned"],
+      default: "open",
+    },
+    
+    
   },
   {
     timestamps: true,

@@ -29,11 +29,21 @@ export const createGig = async (req, res) => {
 };
 
 /**
- * Get all gigs (Public)
+ * Get all open gigs (Public) + Search by title
  */
 export const getAllGigs = async (req, res) => {
   try {
-    const gigs = await Gig.find()
+    const { search } = req.query;
+
+    // Base query: show all gigs (open and assigned)
+    const query = {};
+
+    // Optional search by title (case-insensitive)
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
+    }
+
+    const gigs = await Gig.find(query)
       .populate("createdBy", "name email")
       .sort({ createdAt: -1 });
 
@@ -41,5 +51,25 @@ export const getAllGigs = async (req, res) => {
   } catch (error) {
     console.error("GET GIGS ERROR 👉", error);
     res.status(500).json({ message: "Failed to fetch gigs" });
+  }
+};
+
+/**
+ * Get a single gig by ID (Public)
+ */
+export const getGigById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const gig = await Gig.findById(id).populate("createdBy", "name email");
+
+    if (!gig) {
+      return res.status(404).json({ message: "Gig not found" });
+    }
+
+    res.json(gig);
+  } catch (error) {
+    console.error("GET GIG BY ID ERROR 👉", error);
+    res.status(500).json({ message: "Failed to fetch gig" });
   }
 };

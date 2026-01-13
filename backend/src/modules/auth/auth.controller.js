@@ -66,4 +66,21 @@ import { User } from "../users/user.model.js";
         res.status(500).json({ message: "Login failed" });
       }
     };
+
+    /**
+     * Logout - Clear the authentication cookie
+     */
+    export const logout = async (req, res) => {
+      try {
+        res
+          .cookie("token", "", {
+            httpOnly: true,
+            expires: new Date(0),
+          })
+          .json({ message: "Logged out successfully" });
+      } catch (error) {
+        console.error("LOGOUT ERROR 👉", error);
+        res.status(500).json({ message: "Logout failed" });
+      }
+    };
     
