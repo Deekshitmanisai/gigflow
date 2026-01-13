@@ -2,6 +2,9 @@
 
 GigFlow is a full-stack freelance marketplace where clients can post jobs (Gigs) and freelancers can bid on them. It features a secure authentication system, real-time bidding logic, and a premium user interface.
 
+## 🚀 Live Demo
+**[Click here to view the Live App](https://gigflow-ashy.vercel.app)**
+
 ![GigFlow Hero](https://via.placeholder.com/1200x600?text=GigFlow+Platform)
 
 ## ✨ Features
